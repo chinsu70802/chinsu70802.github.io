@@ -99,7 +99,7 @@ theme_mode: # [light | dark]
 cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar: chinsu70802.github.io\assets\lib\images\hilbert_poincare_switch.gif
+avatar: /assets/images/hilbert_poincare_switch.gif
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
