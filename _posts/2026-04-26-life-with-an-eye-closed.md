@@ -42,7 +42,7 @@ We can buy a plot of land with a signboard that reads:
 
 > **TO ANYONE WHO IS EXTREMELY SATISFIED**
 
-I call this plot of lands as **REALIZATION**.  
+I call this plot of land as **REALIZATION**.  
 
 ---
 
