@@ -19,7 +19,7 @@ Is it worse than walking on a ledge with both eyes closed?
 
 ---
 
-These catechisms are like darts, that have come into the clutches  
+These questions are like darts, that have come into the clutches  
 of a dilating space, inching as I grow.  
 
 What it takes for a perfect aim is just a moment of introspection,  
