@@ -1,6 +1,6 @@
 ---
 title: "Life With An Eye Closed"
-date: 2026-04-26
+date: 2026-04-25
 categories: [Story]
 tags: [Story]
 ---
