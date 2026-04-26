@@ -14,12 +14,12 @@ timezone:
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: To Hilbert or To Poincaré # the main title
+title: Mathameowsic # the main title
 
-tagline: Juggling between formalism and intuitionism in the machine learning era # it will display as the subtitle
+tagline: Math, Stories and Stuff! # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
-  blog on machine learning
+  blog on everything
 
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.
@@ -43,7 +43,7 @@ social:
     - https://github.com/chinsu70802 # change to your GitHub homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
-    # - https://www.linkedin.com/in/username
+    - https://www.linkedin.com/in/raghvrmsh
 
 # Site Verification Settings
 webmaster_verifications:
