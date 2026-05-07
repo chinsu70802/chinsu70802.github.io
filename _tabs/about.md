@@ -12,4 +12,4 @@ I learn better when I write about something. It invokes my spirit of curiosity, 
 
 Occasionally, I will be posting stories as well.
 
-Enjoy :)
+Enjoy the read :)
