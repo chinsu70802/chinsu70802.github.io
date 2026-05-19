@@ -337,6 +337,7 @@ bias_across_estimators = []
 variance_across_estimators = []
 mse_across_estimators = []
 weight_variance_across_estimators = []
+residues_across_estimators = []
 for i in degree_polynomial_estimators:
     weights_across_datasets = []
     mse_across_datasets = []
@@ -353,11 +354,11 @@ for i in degree_polynomial_estimators:
             cols = np.column_stack((train_datasets[j][:,:-1], y_new, train_datasets[j][:, -1]))
             X = cols[:, :-1]
             y = cols[:, -1]
-            lmse_weights_poly_estimator = np.linalg.inv(X.T @ X) @ X.T @ y
+            lmse_weights_poly_estimator = np.linalg.pinv(X) @ y
             weights_across_datasets.append(lmse_weights_poly_estimator)
     average_estimator_across_datasets = np.mean(np.array(weights_across_datasets), axis=0)      
     y_new = np.array([y_test**m for m in range(i+1)])
-    mean_x_hat_estimator = y_new.squeeze().T @ average_estimator_across_datasets  #This approximates the expectation of the estimators (E[c_D(y)])
+    mean_x_hat_estimator = y_new.squeeze().T @ average_estimator_across_datasets  # This approximates the expectation of the estimators (E[c_D(y)])
     bias = np.mean((x_hat_theoretical - mean_x_hat_estimator)**2)
     bias_across_estimators.append(bias)
     weights_across_datasets = np.array(weights_across_datasets).squeeze()
@@ -367,6 +368,8 @@ for i in degree_polynomial_estimators:
     variance_across_estimators.append(variance)
     mse = np.mean((estimates_across_datasets - x_test[:, None])**2)                # MSE reported here is the sum total of the theoretical optimal MSE, bias and variance
     mse_across_estimators.append(mse)
+    residue = x_test[:, None] - estimates_across_datasets
+    residues_across_estimators.append(residue) 
     
 bias_across_estimators = np.array(bias_across_estimators)
 variance_across_estimators = np.array(variance_across_estimators)
@@ -389,6 +392,17 @@ plt.plot(x, weight_variance_across_estimators.squeeze(), label='Variance of lear
 plt.xlabel('Order of estimator')
 plt.ylabel('Variance of learned weights')
 plt.legend()
+
+plt.figure()
+for idx, order in enumerate(degree_polynomial_estimators):
+    residue_vals = residues_across_estimators[idx].flatten()
+    y_coords = np.full(residue_vals.shape, order)
+    plt.scatter(residue_vals, y_coords, s=5)
+plt.yticks(degree_polynomial_estimators)
+plt.xlabel('real axis')
+plt.ylabel('order')
+plt.title('scatter diagrams of estimation errors')
+
 plt.show()
 ```
 
@@ -401,9 +415,11 @@ It can be observed that as the order of the estimator increases, the value of bi
 
 ![Variance of learned weights](assets/images/variance_of_learned_weights.png)
 
-We can now come to the point of concern with data-driven estimators, the residue. Instead of a single theoretical estimator, we now have a group of estimators for different $D$. Given an observation $y$ in the test set, there will $L$ (which in the code is n_datasets) estimators. We need to find the inferred $\hat{x}$ for a given estimator across all observations. From thereon, the residue $x - \hat{x}$ can be computed. The same computation must be carried out for all $L$ estimators of a particular order.  
+We can now come to the point of concern with data-driven estimators, the residue. Instead of a single theoretical estimator, we now have a group of estimators for different $D$. Given an observation $y$ in the test set, there will $L$ (which in the code is n_datasets) estimators. We need to find the inferred $\hat{x}$ for a given estimator across all observations. From thereon, the residue $x - \hat{x}$ can be computed. The same computation must be carried out for all $L$ estimators of a particular order. In the scatter figure below, the residues on the test set are plotted across the aforementioned estimators for different orders. With the number of samples per dataset set in the code, we can observe large variance in the residue as we increase order of the estimator. 
 
-> Play with the code above to dig deeper into the bias-variance relations. Answer questions like 'Will bias always decrease as variance increases?' by making empirical observations (tweaking the values of relevant variables in the code above). Since we have a data-driven estimator now, we have n_datasets amount of estimators for each observation. A point of concern that we usually touch upon with estimates is the variance of the residue. Try observing how the variance of residue changes with order of estimator. You will notice that higher order estimators have high varying residue compared to lower orders. This can be done by adding one line to the code above. The reason for the high variance in residue overlaps with the explanation given above on learned weights.
+![Variance of residue across estimators](assets/images/residue_scatter.png)
+
+> Play with the code above to dig deeper into the bias-variance relations. Answer questions like 'Will bias always decrease as variance increases?' by making empirical observations (tweaking the values of relevant variables in the code above). Try to reason out the behavior of the residue across estimators of different orders (Maybe increase number of samples per dataset (n_entries_per_dataset)).
 {: .prompt-exercise}
 
 ## EPILOGUE
