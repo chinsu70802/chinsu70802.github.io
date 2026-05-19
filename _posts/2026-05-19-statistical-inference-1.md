@@ -429,3 +429,7 @@ Even if we have access to the true distribution of $x$, it is not always easy to
 ## REFERENCES
 
 > Sayed, A. H. (2022). *Inference and Learning from Data: Inference*. Cambridge University Press.
+
+## AI USAGE DISCLOSURE
+
+None of the above content was written using AI. The codes were also written manually. ChatGPT was used as a reference aid for syntax lookup, but not for code generation.  
