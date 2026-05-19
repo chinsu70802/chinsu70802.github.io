@@ -5,7 +5,7 @@ categories: [Story]
 tags: [Story]
 ---
 
-I wrote this story when I was in my 11th grade. I got sometime to polish a few parts of it recently (while retaining the childish immaturity that may be patent in the writing). Enjoy!
+I wrote this story when I was in my 11th grade. Enjoy!
   
 # LIFE WITH AN EYE CLOSED
 
