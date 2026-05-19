@@ -432,4 +432,4 @@ Even if we have access to the true distribution of $x$, it is not always easy to
 
 ## AI USAGE DISCLOSURE
 
-None of the above content was written using AI. The codes were also written manually. ChatGPT was used as a reference aid for syntax lookup, but not for code generation.  
+None of the above content was written using AI. The codes were also written manually. ChatGPT was used as a reference aid for syntax lookup, but not for code generation. Credits are due to Claude for aiding in construction of example related to the variance of residue being same as the variance of input despite there being dependence between the hidden and observable variable.
