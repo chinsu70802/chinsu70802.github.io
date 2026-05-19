@@ -409,3 +409,7 @@ We can now come to the point of concern with data-driven estimators, the residue
 ## EPILOGUE
 
 Even if we have access to the true distribution of $x$, it is not always easy to analytically evaluate (may not have a closed-form expression) the posterior distribution (and hence the conditional mean estimate). With Gaussians, we were fortunate as seen in this post. In the next article, we will cover smart techniques like Laplace, Importance Sampling, Metropolis-Hastings and Gibbs Sampling — methods that allow us to sample from complex, intractable posteriors and approximate their expectations.
+
+## REFERENCES
+
+> Sayed, A. H. (2022). *Inference and Learning from Data: Inference*. Cambridge University Press.
