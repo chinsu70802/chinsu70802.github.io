@@ -554,32 +554,125 @@ for v, ar, es in zip(var, accept_rate, ess):
 
 plt.tight_layout()
 ```
-<link rel="stylesheet" href="/assets/css/mcmc-gallery.css">
 
-<div class="gallery">
+<style>
+.mcmc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin: 1.5rem 0;
+}
 
-  <div class="group-tabs" id="tabs"></div>
+@media (min-width: 900px) {
+  .mcmc-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
 
-  <div class="gallery-header">
-    <span class="gallery-label" id="slide-title"></span>
-    <span class="gallery-counter" id="slide-counter"></span>
-  </div>
+.mcmc-grid figure {
+  margin: 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
 
-  <div class="gallery-img-wrap">
-    <img id="slide-img" alt="">
-  </div>
+.mcmc-grid img {
+  width: 100%;
+  display: block;
+}
 
-  <div class="gallery-caption" id="slide-caption"></div>
+.mcmc-grid figcaption {
+  padding: 8px;
+  font-size: 0.82rem;
+  text-align: center;
+  color: #666;
+}
+</style>
 
-  <div class="gallery-nav">
-    <button id="btn-prev">&larr; Prev</button>
-    <button id="btn-next">Next &rarr;</button>
-  </div>
+<div class="mcmc-grid">
+
+  <figure>
+    <img src="/assets/images/approximate_inference/hist_var_0.001.png">
+    <figcaption>Histogram — var = 0.001</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/images/approximate_inference/trace_var_0.001.png">
+    <figcaption>Trace Plot — var = 0.001</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/images/approximate_inference/running_mean_var_0.001.png">
+    <figcaption>Running Mean — var = 0.001</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/images/approximate_inference/acf_var_0.001.png">
+    <figcaption>ACF — var = 0.001</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/images/approximate_inference/hist_var_0.05.png">
+    <figcaption>Histogram — var = 0.05</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/images/approximate_inference/trace_var_0.05.png">
+    <figcaption>Trace Plot — var = 0.05</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/images/approximate_inference/running_mean_var_0.05.png">
+    <figcaption>Running Mean — var = 0.05</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/images/approximate_inference/acf_var_0.05.png">
+    <figcaption>ACF — var = 0.05</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/images/approximate_inference/hist_var_2.png">
+    <figcaption>Histogram — var = 2</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/images/approximate_inference/trace_var_2.png">
+    <figcaption>Trace Plot — var = 2</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/images/approximate_inference/running_mean_var_2.png">
+    <figcaption>Running Mean — var = 2</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/images/approximate_inference/acf_var_2.png">
+    <figcaption>ACF — var = 2</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/images/approximate_inference/hist_var_8.png">
+    <figcaption>Histogram — var = 8</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/images/approximate_inference/trace_var_8.png">
+    <figcaption>Trace Plot — var = 8</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/images/approximate_inference/running_mean_var_8.png">
+    <figcaption>Running Mean — var = 8</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/images/approximate_inference/acf_var_8.png">
+    <figcaption>ACF — var = 8</figcaption>
+  </figure>
 
 </div>
-
-<script src="/assets/js/mcmc-gallery.js"></script>
-
 ![Acceptance Rate for different variances of the proposal distribution](/assets/images/approximate_inference/ar.png)
 
 ![Effective Sample Size for different variances of the proposal distribution](/assets/images/approximate_inference/ess.png)
