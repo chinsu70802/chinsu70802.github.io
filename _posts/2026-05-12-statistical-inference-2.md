@@ -592,85 +592,117 @@ plt.tight_layout()
 
 <div class="mcmc-grid">
 
-  <figure>
-    <img src="/assets/images/approximate_inference/hist_var_0.001.png">
-    <figcaption>Histogram — var = 0.001</figcaption>
-  </figure>
+<figure>
+  <img 
+    src="/assets/images/approximate_inference/hist_var_0.001.png"
+    alt="Histogram of MCMC samples for proposal variance 0.001">
+  <figcaption>Histogram — var = 0.001</figcaption>
+</figure>
 
-  <figure>
-    <img src="/assets/images/approximate_inference/trace_var_0.001.png">
-    <figcaption>Trace Plot — var = 0.001</figcaption>
-  </figure>
+<figure>
+  <img 
+    src="/assets/images/approximate_inference/trace_var_0.001.png"
+    alt="Trace plot of Markov chain samples for proposal variance 0.001">
+  <figcaption>Trace Plot — var = 0.001</figcaption>
+</figure>
 
-  <figure>
-    <img src="/assets/images/approximate_inference/running_mean_var_0.001.png">
-    <figcaption>Running Mean — var = 0.001</figcaption>
-  </figure>
+<figure>
+  <img 
+    src="/assets/images/approximate_inference/running_mean_var_0.001.png"
+    alt="Running mean convergence plot for proposal variance 0.001">
+  <figcaption>Running Mean — var = 0.001</figcaption>
+</figure>
 
-  <figure>
-    <img src="/assets/images/approximate_inference/acf_var_0.001.png">
-    <figcaption>ACF — var = 0.001</figcaption>
-  </figure>
+<figure>
+  <img 
+    src="/assets/images/approximate_inference/acf_var_0.001.png"
+    alt="Autocorrelation factor plot for proposal variance 0.001">
+  <figcaption>ACF — var = 0.001</figcaption>
+</figure>
 
-  <figure>
-    <img src="/assets/images/approximate_inference/hist_var_0.05.png">
-    <figcaption>Histogram — var = 0.05</figcaption>
-  </figure>
+<figure>
+  <img 
+    src="/assets/images/approximate_inference/hist_var_0.05.png"
+    alt="Histogram of MCMC samples for proposal variance 0.05">
+  <figcaption>Histogram — var = 0.05</figcaption>
+</figure>
 
-  <figure>
-    <img src="/assets/images/approximate_inference/trace_var_0.05.png">
-    <figcaption>Trace Plot — var = 0.05</figcaption>
-  </figure>
+<figure>
+  <img 
+    src="/assets/images/approximate_inference/trace_var_0.05.png"
+    alt="Trace plot of Markov chain samples for proposal variance 0.05">
+  <figcaption>Trace Plot — var = 0.05</figcaption>
+</figure>
 
-  <figure>
-    <img src="/assets/images/approximate_inference/running_mean_var_0.05.png">
-    <figcaption>Running Mean — var = 0.05</figcaption>
-  </figure>
+<figure>
+  <img 
+    src="/assets/images/approximate_inference/running_mean_var_0.05.png"
+    alt="Running mean convergence plot for proposal variance 0.05">
+  <figcaption>Running Mean — var = 0.05</figcaption>
+</figure>
 
-  <figure>
-    <img src="/assets/images/approximate_inference/acf_var_0.05.png">
-    <figcaption>ACF — var = 0.05</figcaption>
-  </figure>
+<figure>
+  <img 
+    src="/assets/images/approximate_inference/acf_var_0.05.png"
+    alt="Autocorrelation factor plot for proposal variance 0.05">
+  <figcaption>ACF — var = 0.05</figcaption>
+</figure>
 
-  <figure>
-    <img src="/assets/images/approximate_inference/hist_var_2.png">
-    <figcaption>Histogram — var = 2</figcaption>
-  </figure>
+<figure>
+  <img 
+    src="/assets/images/approximate_inference/hist_var_2.png"
+    alt="Histogram of MCMC samples for proposal variance 2">
+  <figcaption>Histogram — var = 2</figcaption>
+</figure>
 
-  <figure>
-    <img src="/assets/images/approximate_inference/trace_var_2.png">
-    <figcaption>Trace Plot — var = 2</figcaption>
-  </figure>
+<figure>
+  <img 
+    src="/assets/images/approximate_inference/trace_var_2.png"
+    alt="Trace plot of Markov chain samples for proposal variance 2">
+  <figcaption>Trace Plot — var = 2</figcaption>
+</figure>
 
-  <figure>
-    <img src="/assets/images/approximate_inference/running_mean_var_2.png">
-    <figcaption>Running Mean — var = 2</figcaption>
-  </figure>
+<figure>
+  <img 
+    src="/assets/images/approximate_inference/running_mean_var_2.png"
+    alt="Running mean convergence plot for proposal variance 2">
+  <figcaption>Running Mean — var = 2</figcaption>
+</figure>
 
-  <figure>
-    <img src="/assets/images/approximate_inference/acf_var_2.png">
-    <figcaption>ACF — var = 2</figcaption>
-  </figure>
+<figure>
+  <img 
+    src="/assets/images/approximate_inference/acf_var_2.png"
+    alt="Autocorrelation factor plot for proposal variance 2">
+  <figcaption>ACF — var = 2</figcaption>
+</figure>
 
-  <figure>
-    <img src="/assets/images/approximate_inference/hist_var_8.png">
-    <figcaption>Histogram — var = 8</figcaption>
-  </figure>
+<figure>
+  <img 
+    src="/assets/images/approximate_inference/hist_var_8.png"
+    alt="Histogram of MCMC samples for proposal variance 8">
+  <figcaption>Histogram — var = 8</figcaption>
+</figure>
 
-  <figure>
-    <img src="/assets/images/approximate_inference/trace_var_8.png">
-    <figcaption>Trace Plot — var = 8</figcaption>
-  </figure>
+<figure>
+  <img 
+    src="/assets/images/approximate_inference/trace_var_8.png"
+    alt="Trace plot of Markov chain samples for proposal variance 8">
+  <figcaption>Trace Plot — var = 8</figcaption>
+</figure>
 
-  <figure>
-    <img src="/assets/images/approximate_inference/running_mean_var_8.png">
-    <figcaption>Running Mean — var = 8</figcaption>
-  </figure>
+<figure>
+  <img 
+    src="/assets/images/approximate_inference/running_mean_var_8.png"
+    alt="Running mean convergence plot for proposal variance 8">
+  <figcaption>Running Mean — var = 8</figcaption>
+</figure>
 
-  <figure>
-    <img src="/assets/images/approximate_inference/acf_var_8.png">
-    <figcaption>ACF — var = 8</figcaption>
-  </figure>
+<figure>
+  <img 
+    src="/assets/images/approximate_inference/acf_var_8.png"
+    alt="Autocorrelation factor plot for proposal variance 8">
+  <figcaption>ACF — var = 8</figcaption>
+</figure>
 
 </div>
 ![Acceptance Rate for different variances of the proposal distribution](/assets/images/approximate_inference/ar.png)
