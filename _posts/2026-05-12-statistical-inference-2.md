@@ -577,7 +577,7 @@ plt.tight_layout()
     <span class="gallery-counter" id="slide-counter"></span>
   </div>
   <div class="gallery-img-wrap">
-    <img id="slide-img" src="" alt="">
+    <img id="slide-img" alt="">
   </div>
   <div class="gallery-caption" id="slide-caption"></div>
     <div class="gallery-nav">
