@@ -657,7 +657,7 @@ render();
 
 ![Acceptance Rate for different variances of the proposal distribution](/assets/images/approximate_inference/ar.png)
 
-![Effective Sample Size for different variances of the proposal distribution](assets/images/approximate_inference/ess.png)
+![Effective Sample Size for different variances of the proposal distribution](/assets/images/approximate_inference/ess.png)
 
 The code explores the behavior of the markov chain for different variances of the proposal distribution (which is a truncated gaussian in this case; it is symmetric). We are running the algorithm for $10000$ iterations. Before delving into an analysis, it is good to know what a burn-in period is. We cannot expect the markov chain to have attained a stationary distribution within the first few iterations of the algorithm. This means that the first few samples may not actually be from the target distribution. We tend to drop these initial samples. The amount of time taken by the chain to attain a stationary distribution is called the burn-in period. 
 
