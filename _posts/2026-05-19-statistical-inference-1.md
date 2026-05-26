@@ -109,7 +109,7 @@ plt.grid(True)
 plt.show()
 ```
 
-![Inferencing a gaussian random variable with no observations related to it](assets\images\mean_square_inference\inference_without_observations.png)
+![Inferencing a gaussian random variable with no observations related to it](/assets/images/mean_square_inference/inference_without_observations.png)
 
 ## INFERENCE WITH OBSERVATIONS
 
@@ -175,7 +175,7 @@ plt.legend(loc='upper right')
 plt.show()
 ```
 
-![Inferencing, with observations, a bernoulli hidden variable under additive gaussian noise](assets\images\mean_square_inference\inference_with_observations.png)
+![Inferencing, with observations, a bernoulli hidden variable under additive gaussian noise](/assets/images/mean_square_inference/inference_with_observations.png)
 
 > Modify the code pasted above to understand the effect of noise (by tweaking std_dev_n - making it too large or too small) on the variance of residue.
 {: .prompt-exercise}
@@ -406,18 +406,18 @@ plt.title('scatter diagrams of estimation errors')
 plt.show()
 ```
 
-![Bias-Variance Relation Visualization](assets\images\mean_square_inference\bias_variance.png)
+![Bias-Variance Relation Visualization](/assets/images/mean_square_inference/bias_variance.png)
 
 It can be observed that as the order of the estimator increases, the value of bias decreases and the value of variance increases. The total MSE, which is a sum of the theoretical MMSE, bias, and variance, is dominated by the variance value at higher orders. In other words, with a more "complex" model, we are able to get closer to the theoretical estimate, $\tanh(\frac{y}{\mathbb{Var}[n]})$, on an average. But different estimators do not seem to agree more with each other on an average. The reason why the variance increases with order of the estimator is patent when we observe the figure below. As the order increases, the variance of the learned weights increases a lot. As the learned weights differ significantly across different datasets $D$, the estimators will also be different significantly. The learned weights vary a lot in higher orders (more than 2) when compared with linear estimator. 
 
 > In the code above, the test dataset is independent of the train_datasets. Wherever $D$ is mentioned in the explanation, it refers to the train_datasets. As $D$ changes, so will the estimators change. The test dataset is fixed.
 {: .prompt-info}
 
-![Variance of learned weights](assets\images\mean_square_inference\variance_of_learned_weights.png)
+![Variance of learned weights](/assets/images/mean_square_inference/variance_of_learned_weights.png)
 
 We can now come to the point of concern with data-driven estimators, the residue. Instead of a single theoretical estimator, we now have a group of estimators for different $D$. Given an observation $y$ in the test set, there will $L$ (which in the code is n_datasets) estimators. We need to find the inferred $\hat{x}$ for a given estimator across all observations. From thereon, the residue $x - \hat{x}$ can be computed. The same computation must be carried out for all $L$ estimators of a particular order. In the scatter figure below, the residues on the test set are plotted across the aforementioned estimators for different orders. With the number of samples per dataset set in the code, we can observe large variance in the residue as we increase order of the estimator. 
 
-![Variance of residue across estimators](assets\images\mean_square_inference\residue_scatter.png)
+![Variance of residue across estimators](/assets/images/mean_square_inference/residue_scatter.png)
 
 > Play with the code above to dig deeper into the bias-variance relations. Answer questions like 'Will bias always decrease as variance increases?' by making empirical observations (tweaking the values of relevant variables in the code above). Try to reason out the behavior of the residue across estimators of different orders (Maybe increase number of samples per dataset (n_entries_per_dataset)).
 {: .prompt-exercise}

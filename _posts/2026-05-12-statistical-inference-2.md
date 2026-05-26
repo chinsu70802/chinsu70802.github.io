@@ -206,7 +206,7 @@ plt.show()
 
 Chi-Squared is a right-skewed distribution. Most of the probability mass lies to the left, and a few extremely high values pull the tail outwards to the right. Let us visually see the laplace approximation for this distribution:
 
-![Laplace Approximation of Chi-Squared](assets\images\approximate_inference\laplace_chi_squared.png)
+![Laplace Approximation of Chi-Squared](/assets/images/approximate_inference/laplace_chi_squared.png)
 
 In this case, the gaussian approximation could reasonably capture the trend around the mode of the Chi-Squared distribution. But it failed to model the right-skewness seen in the actual Chi-Squared. The derivation of the gaussian approximation was done with second-order taylor series expansion. That could only capture the curvature of the target distribution (Chi-Squared here), but not the skewness or kurtosis. This is one of the failure cases if Laplace method is used for approximating posteriors.
 
@@ -215,7 +215,7 @@ In this case, the gaussian approximation could reasonably capture the trend arou
 
 Mixture of gaussians is a bimodal distribution. Let us visually see the laplace approximation for this distribution:
 
-![Laplace Approximation of Mixture of Gaussians](assets\images\approximate_inference\laplace_mix_gauss.png)
+![Laplace Approximation of Mixture of Gaussians](/assets/images/approximate_inference/laplace_mix_gauss.png)
 
 The gaussian approximation could only model one of the components appreciably. This is because the initial latent variable in the gradient ascent algorithm was set to $0.5$ in the code. It could ascend to the nearest local maxima and stop there. This is another failure case of Laplace method.
 
@@ -350,7 +350,7 @@ Variance of estimated expectation using gaussian proposal: 2.3927776240948028e-0
 Variance of estimated expectation using true proposal: 2.20303668910995e-08
 ```
 
-![Visualizing Importance Sampling](assets/images/approximate_inference/importance_sampling.png)
+![Visualizing Importance Sampling](/assets/images/approximate_inference/importance_sampling.png)
 
 The shell output reveals a few important things. Firstly, the actual expectation and the mean of the estimated expectations over 100 runs (100 different samples of size $N$ leads to 100 different estimates of the expectation) are very close to each other. This means that the estimated expectation obtained by sampling from the truncated gaussian proposal distribution (which is $\mathbb{\pi}$) is an unbiased estimate ($$\mathbb{E}_{\mathbb{P}}[f(x)]=\mathbb{E}_{\mathbb{\pi}}[\frac{1}{N} \sum_{n = 1}^{N} \frac{f(x)\mathbb{P}(x)}{\mathbb{\pi}(x)}] $$). Secondly, the variance of the estimated expectations across 100 runs by sampling particles from gaussian proposal is $10$x less than the variance of estimated expectations across these runs by sampling values from the mixture of beta distribution. 
 
@@ -655,7 +655,7 @@ document.addEventListener('keydown', e => {
 render();
 </script>
 
-![Acceptance Rate for different variances of the proposal distribution](assets/images/approximate_inference/ar.png)
+![Acceptance Rate for different variances of the proposal distribution](/assets/images/approximate_inference/ar.png)
 
 ![Effective Sample Size for different variances of the proposal distribution](assets/images/approximate_inference/ess.png)
 
@@ -673,9 +673,9 @@ Since the variance is very low, the algorithm will accept many of the candidate 
 
 As the variance becomes large, we can expect the candidates $x'$ (sampled from the proposal conditioned on $x_{j - 1}$) to take wild leaps to less expressive regions of the target distribution. If this happens, then the Hastings ratio will be significantly smaller than $1$, rejecting $x'$ most of the time. It implies that the markov chain will be stuck in the same sample value (previous sample) for sometime. This may not be clear from the image in the slide deck. Below are the zoomed in versions of the trace plot for both low and high variance case. In the low variance case, the previous sample was not repeated most of the times. Due to explanation given for the high variance case, we can see that the previous sample value is retained for sometime before taking a leap to a different sample. This implies that the acceptance rate for high variance will be less when compared to the low variance case.
 
-![Zoomed in version of trace plot for low variance](assets/images/approximate_inference/zoomed_var_0.001.png)
+![Zoomed in version of trace plot for low variance](/assets/images/approximate_inference/zoomed_var_0.001.png)
 
-![Zoomed in version of trace plot for high variance](assets/images/approximate_inference/zoomed_var_8.png)
+![Zoomed in version of trace plot for high variance](/assets/images/approximate_inference/zoomed_var_8.png)
 
 The ACF approaches zero within a few lags than the low variance case. So, the ESS will be more here. With high variance, the chain has good enough flexibility to explore more (at the cost of getting a candidate rejected). This can be seen in the trace plot when variance is $8$. The chain also covers the entire range from $0$ to $2$. The histogram plotted from MCMC samples for this variance has covered all the three modes in the target distribution. We can expect the samples here to be more informative. That explains the high ESS. But the running mean takes a lot of iterations to come closer to the actual mean. With variance set to $2$, the running mean converges to the actual mean within $2000$ iterations. 
 
@@ -915,26 +915,26 @@ True Mean: 4
 True Variance: 0.5
 ```
 
-![Contour vs samples from gibbs sampler](assets\images\approximate_inference\contour_vs_samples_gibbs.png)
+![Contour vs samples from gibbs sampler](/assets/images/approximate_inference/contour_vs_samples_gibbs.png)
 
 As is evident from the plot above, the samples are mostly from the high density region of the target joint distribution.
 
-![Trace plot of mean from gibbs sampler](assets\images\approximate_inference\mean_trace_gibbs.png)
+![Trace plot of mean from gibbs sampler](/assets/images/approximate_inference/mean_trace_gibbs.png)
 
-![Trace plot of variance from gibbs sampler](assets\images\approximate_inference\var_trace_gibbs.png)
+![Trace plot of variance from gibbs sampler](/assets/images/approximate_inference/var_trace_gibbs.png)
 
 The mean samples seem to have stabilized around a region within a few iterations. That region is close to the true mean as in the shell output. As with the mean, the variance seem to have stabilized around a region close to the true variance as in the shell output. Though the burn-in period is set to $500$ in the code, the chain seems to have already reached the region of interest (the region of high density in the joint distribution)
 
-![Estimated marginal distribution of mean from gibbs sampler](assets\images\approximate_inference\mean_marginal_gibbs.png)
+![Estimated marginal distribution of mean from gibbs sampler](/assets/images/approximate_inference/mean_marginal_gibbs.png)
 
-![Estimated marginal distribution of variance from gibbs sampler](assets\images\approximate_inference\var_marginal_gibbs.png)
+![Estimated marginal distribution of variance from gibbs sampler](/assets/images/approximate_inference/var_marginal_gibbs.png)
 
 Plotting just the first and second coordinates ($\mu$ and $\sigma^2$) separately gives an approximation of their posterior marginal distributions, 
 $\mathbb{P}(\mu|Y)$ and $\mathbb{P}(\sigma^2|Y)$. Since Gibbs Sampler got samples from the posterior joint density, we get these posterior marginal distributions  for free (at the cost of having to know the full conditional distribution). We can carry out estimation problems like getting the expected posterior mean, $\mathbb{E}[\mu|Y]$. In this case, the expected posterior mean is close to the true mean, but the variance is slightly off. That can be corrected by increasing the number of observations $N$ in the code. We can also notice that the posterior and the prior of both the mean and variance have the same form. The posterior marginal distribution of the mean looks like a gaussian, and that of the variance is right-skewed just like the inverse gamma distribution.  
 
-![Autocorrelation across iterations for the mean](assets\images\approximate_inference\mu_acf.png)
+![Autocorrelation across iterations for the mean](/assets/images/approximate_inference/mu_acf.png)
 
-![Autocorrelation across iterations for the mean](assets\images\approximate_inference\var_acf.png)
+![Autocorrelation across iterations for the mean](/assets/images/approximate_inference/var_acf.png)
 
 The means sampled from the joint density does not have a lot of correlation amongst each other across several lags. So is the case with the sampled variances. 
 
