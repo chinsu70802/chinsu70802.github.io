@@ -554,106 +554,31 @@ for v, ar, es in zip(var, accept_rate, ess):
 
 plt.tight_layout()
 ```
-<style>
-.gallery{border:0.5px solid #ccc;border-radius:8px;overflow:hidden;background:#fff}
-.gallery-header{padding:12px 16px;border-bottom:0.5px solid #ccc;display:flex;align-items:center;justify-content:space-between}
-.gallery-label{font-size:13px;font-weight:500}
-.gallery-counter{font-size:12px;color:#888}
-.gallery-img-wrap{width:100%;background:#f5f5f5;display:flex;align-items:center;justify-content:center}
-.gallery-img-wrap img{width:100%;object-fit:contain}
-.gallery-caption{padding:8px 16px;font-size:12px;color:#666;border-top:0.5px solid #ccc}
-.gallery-nav{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-top:0.5px solid #ccc}
-.gallery-nav button{font-size:13px;padding:6px 14px;border-radius:6px;border:0.5px solid #ccc;background:transparent;cursor:pointer}
-.gallery-nav button:disabled{opacity:0.35;cursor:not-allowed}
-.group-tabs{display:flex;border-bottom:0.5px solid #ccc}
-.group-tab{padding:8px 14px;font-size:12px;color:#888;cursor:pointer;border-bottom:2px solid transparent}
-.group-tab.active{color:#000;border-bottom-color:#000;font-weight:500}
-</style>
+<link rel="stylesheet" href="/assets/css/mcmc_gallery.css">
 
 <div class="gallery">
+
   <div class="group-tabs" id="tabs"></div>
+
   <div class="gallery-header">
     <span class="gallery-label" id="slide-title"></span>
     <span class="gallery-counter" id="slide-counter"></span>
   </div>
+
   <div class="gallery-img-wrap">
     <img id="slide-img" alt="">
   </div>
+
   <div class="gallery-caption" id="slide-caption"></div>
-    <div class="gallery-nav">
-    <button id="btn-prev" onclick="move(-1)" 
-        style="font-size:13px;padding:6px 14px;border-radius:6px;border:1px solid #aaa;background:#fff;color:#000;cursor:pointer">
-        &larr; Prev
-    </button>
-    <button id="btn-next" onclick="move(1)"
-        style="font-size:13px;padding:6px 14px;border-radius:6px;border:1px solid #aaa;background:#fff;color:#000;cursor:pointer">
-        Next &rarr;
-    </button>
-    </div>
+
+  <div class="gallery-nav">
+    <button id="btn-prev">&larr; Prev</button>
+    <button id="btn-next">Next &rarr;</button>
+  </div>
+
 </div>
 
-<script>
-const variances = ['0.001', '0.05', '2', '8'];
-const diagnostics = [
-  { key: 'hist',          label: 'MCMC samples vs target',  caption: 'MCMC samples vs normalised target g(x)/Z' },
-  { key: 'trace',        label: 'Trace plot',           caption: 'Trace Plot' },
-  { key: 'running_mean', label: 'Running mean',         caption: 'Cumulative v/s true mean' },
-  { key: 'acf',          label: 'ACF',                  caption: 'Autocorrelation at lags 1–100, post burn-in' },
-];
-
-const slides = [];
-variances.forEach(v => {
-  diagnostics.forEach(d => {
-    slides.push({
-      title:   `${d.label} — var = ${v}`,
-      src:     `/assets/images/approximate_inference/${d.key}_var_${v}.png`,
-      caption: d.caption,
-      group:   d.label,
-    });
-  });
-});
-
-let current = 0;
-const groups  = [...new Set(slides.map(s => s.group))];
-const tabsEl    = document.getElementById('tabs');
-const titleEl   = document.getElementById('slide-title');
-const counterEl = document.getElementById('slide-counter');
-const imgEl     = document.getElementById('slide-img');
-const captionEl = document.getElementById('slide-caption');
-const btnPrev   = document.getElementById('btn-prev');
-const btnNext   = document.getElementById('btn-next');
-
-groups.forEach(g => {
-  const t = document.createElement('div');
-  t.className = 'group-tab';
-  t.textContent = g;
-  t.onclick = () => goTo(slides.findIndex(s => s.group === g));
-  tabsEl.appendChild(t);
-});
-
-function render() {
-  const s = slides[current];
-  titleEl.textContent   = s.title;
-  counterEl.textContent = `${current + 1} / ${slides.length}`;
-  imgEl.src             = s.src;
-  imgEl.alt             = s.title;
-  captionEl.textContent = s.caption;
-  btnPrev.disabled      = current === 0;
-  btnNext.disabled      = current === slides.length - 1;
-  document.querySelectorAll('.group-tab').forEach((t, i) => {
-    t.classList.toggle('active', groups[i] === slides[current].group);
-  });
-}
-
-function goTo(i) { current = Math.max(0, Math.min(slides.length - 1, i)); render(); }
-function move(d) { goTo(current + d); }
-document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowRight') move(1);
-  if (e.key === 'ArrowLeft')  move(-1);
-});
-
-render();
-</script>
+<script src="/assets/js/mcmc_gallery.js"></script>
 
 ![Acceptance Rate for different variances of the proposal distribution](/assets/images/approximate_inference/ar.png)
 
