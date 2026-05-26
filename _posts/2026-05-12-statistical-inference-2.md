@@ -554,7 +554,7 @@ for v, ar, es in zip(var, accept_rate, ess):
 
 plt.tight_layout()
 ```
-<link rel="stylesheet" href="/assets/css/mcmc_gallery.css">
+<link rel="stylesheet" href="/assets/css/mcmc-gallery.css">
 
 <div class="gallery">
 
@@ -578,7 +578,7 @@ plt.tight_layout()
 
 </div>
 
-<script src="/assets/js/mcmc_gallery.js"></script>
+<script src="/assets/js/mcmc-gallery.js"></script>
 
 ![Acceptance Rate for different variances of the proposal distribution](/assets/images/approximate_inference/ar.png)
 
