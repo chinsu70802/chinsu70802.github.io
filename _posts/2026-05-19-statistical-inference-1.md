@@ -22,7 +22,7 @@ To make it more mathematically precise, we have a distribution over the set of w
 
 This is what is meant by inference - estimate the unknown using observable manifestations of it!
 
-> We may have stopped with just the posterior distribution itself - That is also a form of inference as we have estimated a distribution of the unknown given the observation. Inference doesn't always mean a point estimate obtained from a distribution. It is a process through which one can quantitatively ascertain the uncertainty of any unknown random variable (e.g. getting to know that an unknown random variable has so and so mean and variance is itself an appreciable inference). For most of the discussions here, we will be interested in point estimates (More importantly, we more or less know the distribution of the hidden variable, but we do not know what the hidden variable gets realized as at any given moment. Our efforts will be directed towards estimating that unknown realization from a known distribution of the hidden variable).
+> For most of the discussions here, we will be interested in point estimates. More importantly, we more or less know the distribution of the hidden variable, but we do not know what the hidden variable gets realized as at any given moment. Our efforts will be directed towards estimating that unknown realization from a known distribution of the hidden variable.
 {: .prompt-tip }
 
 > The example involving the acoustic waveform is an interesting way of viewing the problem of automatic speech recognition. It is called as the 'noisy-channel model' of speech recognition. You can refer to Jurafsky & Martin's book on Speech and Natural Language Processing to learn more.
@@ -32,7 +32,7 @@ This is what is meant by inference - estimate the unknown using observable manif
 
 What is desired is an optimal estimate of the unknown random variable. But optimal in what sense? If there is an estimation, we need to know how good of an estimate that is. To facilitate this, we can begin by finding the squared difference between the groundtruth $x$ and its estimation $\hat{x}$. As $x$ and $\hat{x}$ can be random variables, we are interested in $\mathbb{E}[(x - \hat{x})^2]$ (If the subscript of $\mathbb{E}$ is empty, then we are taking expectation over all quantities of randomness in the expression). This is the mean square risk. Our objective is to minimize the mean square risk with respect to $\hat{x}$, the only quantity that is under our control. $x$ is decided by nature, and beyond our control. In effect, $$\hat{x}_{o} = \arg\min\limits_{\hat{x}} \mathbb{E}[(x - \hat{x})^2]$$, where $\hat{x}_{o}$ is the optimal/best estimate. On an average, we want the estimate $\hat{x}$ to be as close as possible to $x$. We will be using the mean square risk for the rest of this blog as a means to measure optimality of an estimator.
 
-> The quantity $x - \hat{x}$ is called the residual ($\tilde{x}$). We will be frequently commenting about this in the future. Ideally, we want the best estimate of $x$ which is as close as possible to $x$. No matter what $x$ nature decides to use and the estimate $\hat{x}$ we derive from the observable manifestations of $x$, the residual should be close to zero for the best estimate. On an average, the residual should be close to zero ($\mathbb{E}[\tilde{x}] \approx 0$). For each $x$, we would have obtained different estimates. The set of residuals must be compactly packed around zero. For example, if x can take values like {$36.025, 64.0001, \cdots$} and the estimates are {$36, 64, \ldots$}, the residuals will be {$0.025, 0.0001, \cdots$}. As can be noticed, the variance of the residuals is close to zero. Ideally, it is expected that $\tilde{x}$ takes the value $0$ almost surely. In practice, that is not possible (unless we are talking about a deterministic process that nature decides to use). Residuals can be thought of as a part of $x$ that remains after removing the predictable aspect $\hat{x}$ from it. We ideally want to predict everything about $x$. We will see more on this later.
+> The quantity $x - \hat{x}$ is called the residual ($\tilde{x}$). We will be frequently commenting about this in the future. Ideally, we want the best estimate of $x$ to be as close as possible to $x$. No matter what $x$ nature decides to use and the estimate $\hat{x}$ we derive from the observable manifestations of $x$, the residual should be close to zero for the best estimate. On an average, the residual should be close to zero ($\mathbb{E}[\tilde{x}] \approx 0$). For each $x$, we would have obtained an estimate. The set of residuals must be compactly packed around zero. For example, if x can take values like {$36.025, 64.0001, \cdots$} and the estimates are {$36, 64, \ldots$}, the residuals will be {$0.025, 0.0001, \cdots$}. As can be noticed, the variance of the residuals is close to zero. Ideally, it is expected that $\tilde{x}$ takes the value $0$ almost surely. In practice, that is not possible (unless we are talking about a deterministic process that nature decides to use). Residuals can be thought of as a part of $x$ that remains after removing the predictable aspect $\hat{x}$ from it. We ideally want to predict everything about $x$. We will see more on this later.
 {: .prompt-tip } 
 
 ## INFERENCE WITHOUT OBSERVATIONS
@@ -109,7 +109,7 @@ plt.grid(True)
 plt.show()
 ```
 
-![Inferencing a gaussian random variable with no observations related to it](assets/images/inference_without_observations.png)
+![Inferencing a gaussian random variable with no observations related to it](assets\images\mean_square_inference\inference_without_observations.png)
 
 ## INFERENCE WITH OBSERVATIONS
 
@@ -175,7 +175,7 @@ plt.legend(loc='upper right')
 plt.show()
 ```
 
-![Inferencing, with observations, a bernoulli hidden variable under additive gaussian noise](assets/images/inference_with_observations.png)
+![Inferencing, with observations, a bernoulli hidden variable under additive gaussian noise](assets\images\mean_square_inference\inference_with_observations.png)
 
 > Modify the code pasted above to understand the effect of noise (by tweaking std_dev_n - making it too large or too small) on the variance of residue.
 {: .prompt-exercise}
@@ -406,18 +406,18 @@ plt.title('scatter diagrams of estimation errors')
 plt.show()
 ```
 
-![Bias-Variance Relation Visualization](assets/images/bias_variance.png)
+![Bias-Variance Relation Visualization](assets\images\mean_square_inference\bias_variance.png)
 
 It can be observed that as the order of the estimator increases, the value of bias decreases and the value of variance increases. The total MSE, which is a sum of the theoretical MMSE, bias, and variance, is dominated by the variance value at higher orders. In other words, with a more "complex" model, we are able to get closer to the theoretical estimate, $\tanh(\frac{y}{\mathbb{Var}[n]})$, on an average. But different estimators do not seem to agree more with each other on an average. The reason why the variance increases with order of the estimator is patent when we observe the figure below. As the order increases, the variance of the learned weights increases a lot. As the learned weights differ significantly across different datasets $D$, the estimators will also be different significantly. The learned weights vary a lot in higher orders (more than 2) when compared with linear estimator. 
 
 > In the code above, the test dataset is independent of the train_datasets. Wherever $D$ is mentioned in the explanation, it refers to the train_datasets. As $D$ changes, so will the estimators change. The test dataset is fixed.
 {: .prompt-info}
 
-![Variance of learned weights](assets/images/variance_of_learned_weights.png)
+![Variance of learned weights](assets\images\mean_square_inference\variance_of_learned_weights.png)
 
 We can now come to the point of concern with data-driven estimators, the residue. Instead of a single theoretical estimator, we now have a group of estimators for different $D$. Given an observation $y$ in the test set, there will $L$ (which in the code is n_datasets) estimators. We need to find the inferred $\hat{x}$ for a given estimator across all observations. From thereon, the residue $x - \hat{x}$ can be computed. The same computation must be carried out for all $L$ estimators of a particular order. In the scatter figure below, the residues on the test set are plotted across the aforementioned estimators for different orders. With the number of samples per dataset set in the code, we can observe large variance in the residue as we increase order of the estimator. 
 
-![Variance of residue across estimators](assets/images/residue_scatter.png)
+![Variance of residue across estimators](assets\images\mean_square_inference\residue_scatter.png)
 
 > Play with the code above to dig deeper into the bias-variance relations. Answer questions like 'Will bias always decrease as variance increases?' by making empirical observations (tweaking the values of relevant variables in the code above). Try to reason out the behavior of the residue across estimators of different orders (Maybe increase number of samples per dataset (n_entries_per_dataset)).
 {: .prompt-exercise}
