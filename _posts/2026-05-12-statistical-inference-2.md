@@ -2,7 +2,7 @@
 
 layout: post
 title: "Approximate Inference"
-date: 2026-05-25
+date: 2026-05-26
 categories: [Statistics]
 tags: [Statistics]
 math: True
@@ -812,7 +812,7 @@ $$
 \end{align}
 $$
 
-Compare with the balance equation seen in the discussion on Metropolis-Hastings, and convince yourself that the joint distribution will be the stationary distribution of the markov chain.
+Compare with the balance equation seen in the discussion on Metropolis-Hastings, and convince yourself that the joint distribution will be the stationary distribution of the markov chain (assume ergodicity is satisfied).
 
 Let us take a look at a simulation of this sampling approach to understand more about it.
 
@@ -965,6 +965,31 @@ True Mean: 4
 True Variance: 0.5
 ```
 
+In the code above, we have considered the following bayesian model:
+
+$$
+\begin{align}
+&\mu \sim \mathcal{N}(m,\sigma_mu^2) \\
+&\sigma^2 \sim \mathrm{InvGamma}(\alpha,\beta) \\
+&y_i \sim \mathcal{N}(\mu,\sigma^2) \qquad i = 1,2,\cdots,N
+\end{align}
+$$
+
+We are trying to get the posterior joint density 
+$\mathbb{P}(\mu,\sigma^2|Y)$, where $Y$ is the observation sequence ($y_1, y_2, \cdots, y_N $). It will be proportional to the product of the likelihood 
+$\mathcal{N}(Y|\mu,\sigma^2)$ and the joint prior 
+$\mathbb{P}(\mu,\sigma^2)$. We can consider $\mu$ and $\sigma^2$ to be independent of each other, and write the joint prior as the product of probabilities. To work with the Gibbs Sampler, we need the full conditional distributions. Namely, 
+$\mathbb{P}(\mu|\sigma^2,Y)$ and $\mathbb{P}(\sigma^2|\mu,Y)$. 
+
+> The PDF of Inverse Gamma ($\mathrm{InvGamma}$) is 
+>$\mathbb{P}(x \mid \alpha, \beta) = \frac{\beta^\alpha}{\Gamma(\alpha)}x^{-(\alpha+1)}\exp\left(-\frac{\beta}{x}\right),\quad x > 0$
+{: .prompt-info}
+
+> Derive both the full conditional distributions for the given bayesian model. Start with expressing the joint posterior as the product of likelihood and joint prior. Use Independence to further split the joint prior. For 
+>$\mathbb{P}(\mu|\sigma^2,Y)$, fix $\sigma^2$ and $Y$ as constants in the expression you obtained for the joint posterior, and  express it in terms $\mu$. For 
+>$\mathbb{P}(\sigma^2|\mu,Y)$, fix $\mu$ and $Y$ as constants in the joint posterior expression, and express it in terms of $\sigma^2$. You will end up with the full conditionals as in the code! 
+{: .prompt-exercise}
+
 ![Contour vs samples from gibbs sampler](/assets/images/approximate_inference/contour_vs_samples_gibbs.png)
 
 As is evident from the plot above, the samples are mostly from the high density region of the target joint distribution.
@@ -973,7 +998,7 @@ As is evident from the plot above, the samples are mostly from the high density 
 
 ![Trace plot of variance from gibbs sampler](/assets/images/approximate_inference/var_trace_gibbs.png)
 
-The mean samples seem to have stabilized around a region within a few iterations. That region is close to the true mean as in the shell output. As with the mean, the variance seem to have stabilized around a region close to the true variance as in the shell output. Though the burn-in period is set to $500$ in the code, the chain seems to have already reached the region of interest (the region of high density in the joint distribution)
+The mean samples seem to have stabilized around a region within a few iterations. That region is close to the true mean as in the shell output. Similar to the mean, the variance seem to have stabilized around a region close to the true variance as in the shell output. Though the burn-in period is set to $500$ in the code, the chain seems to have already reached the region of interest (the region of high density in the joint distribution) within a few iterations.
 
 ![Estimated marginal distribution of mean from gibbs sampler](/assets/images/approximate_inference/mean_marginal_gibbs.png)
 
@@ -992,7 +1017,7 @@ In Metropolis-Hastings, we were worried about choosing the right proposal distri
 
 ## EPILOGUE
 
-The concerning problem dealt with in this article is intractability of posterior distributions. Intuitively what we wanted was an approximation of the posterior that is as close as possible to the true posterior. Can we not look at this as an optimization problem? We can try looking at a bunch of probability densities (which are essentially functions with specific constraints) and compare that with the posterior via KL-Divergence. Any density that has the least possible KL-Divergence with the true posterior can be considered as an approximation of that posterior. This paradigm of viewing inference as an optimization problem is called Variational Inference, which will be the focus of our next blog! 
+The concerning problem dealt with in this article is intractability of posterior distributions. We started with the Laplace method that proposes a gaussian approximation of the posterior. Continuing along that line of motivation, what we wanted was a tractable approximation of the posterior that is as close as possible to the true posterior. Can we not look at this as an optimization problem? We can try looking at a bunch of probability densities (which are essentially functions with specific constraints) and compare that with the true posterior via measures like KL-Divergence. Any density that has the least possible KL-Divergence with the true posterior can be considered as an approximation of that posterior. This paradigm of viewing inference as an optimization problem is called Variational Inference, which will be the focus of our next blog! 
 
 >MCMC is reported to work well on lower dimensions, and seems to be less efficient for higher dimensions. Variational Inference, powered by efficient optimization algorithms, is considered more efficient than MCMC in both lower and higher dimensions.
 {: .prompt-info}
@@ -1004,11 +1029,15 @@ The concerning problem dealt with in this article is intractability of posterior
 
 > Bishop, C. M. (2007). Pattern Recognition and Machine Learning (Information Science and Statistics). Springer. ISBN: 0387310738
 
-> https://rpubs.com/Deb2024/1347161 - Helped me understand the balance equation in Gibbs Sampling.
+> [This blog helped me understand the balance equation in Gibbs Sampling](https://rpubs.com/Deb2024/1347161) 
 
-> https://youtu.be/C3p2wI4RAi8?si=0KyfouO8gUd0_zLd - Acted as a reference for my implementation.
+> [This youtube video was used as a reference for implementing Importance Sampling](https://youtu.be/C3p2wI4RAi8?si=0KyfouO8gUd0_zLd)
+
+> [I referred to this for the Bayesian Model used in the Gibbs Sampling Implementation](https://youtu.be/2ff_Dm41Tx4?si=v8x-Ot40yP5D1HeC)
+
+The pseudocodes for Metropolis-Hastings and Gibbs Sampling were taken from Sayed, A.H. (2022) and Bishop, C.M. (2007) respectively.
 
 
 ## AI USAGE DISCLOSURE
 
-None of the above content was written using AI. The codes were also written manually. ChatGPT was used as a reference aid for syntax lookup, but not for code generation. Claude helped in creating the slide deck that contains nearly 16 plots in it for the Metropolis-Hastings algorithm, and also created the algorithm box in which the pseudocodes are written. 
+None of the textual content (with the exception of the pseudocode) was written using AI. The codes were also written manually. ChatGPT was used as a reference aid for syntax lookup, but not for code generation. It also helped in creating the collage in CSS that contains nearly 16 plots in it for the Metropolis-Hastings algorithm. Claude aided in creating the box for writing algorithms, and also wrote the pseudocodes by referring to the aforementioned two books. 
