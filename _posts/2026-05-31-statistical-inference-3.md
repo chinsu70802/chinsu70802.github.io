@@ -183,10 +183,12 @@ q_k^{*}(\mu_k) &\propto \exp (\log p(\mu_k) + \sum_{i = 1}^N \phi_{im} \log p(x_
 \end{align}
 $$
 
-> Continue from the last step in the previous derivation and try getting the parameters for the variational factor $q_k(\mu_k)$. You know $p(\mu_k)$ and $p(x_i|\mu_k)$ from the bayesian model. For verifying the final result obtained, you can refer to the python code given below.
+> Continue from the last step in the previous derivation and try getting the parameters for the variational factor 
+>$q_k(\mu_k)$. You know $p(\mu_k)$ and $p(x_i|\mu_k)$ from the bayesian model. For verifying the final result obtained, you can refer to the python code given below.
 {: .prompt-exercise}
 
-> Keeping the above derivation for ELBO as reference, try expressing ELBO in terms of the variational factors for the cluster assigment $q_i(c_i)$ and obtain the parameters for the same. Though not mandatory to solve, you can write $p(x_i|\mathbf{\mu},c_i) = \prod_{k = 1}^K p(x_i|\mu_k)^{c_{ik}}$ for ease of derivation. You can refer to the code below to verify your final result/
+> Keeping the above derivation for ELBO as reference, try expressing ELBO in terms of the variational factors for the cluster assigment $q_i(c_i)$ and obtain the parameters for the same. Though not mandatory, you can write 
+>$p(x_i|\mathbf{\mu},c_i) = \prod_{k = 1}^K p(x_i|\mu_k)^{c_{ik}}$ for ease of derivation. You can refer to the code below to verify your final result
 {: .prompt-exercise}
 ```python
 """
