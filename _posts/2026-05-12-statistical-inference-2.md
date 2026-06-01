@@ -360,7 +360,9 @@ From the figure, it can be seen that the function $f$ takes high values in regio
 >$|p(x)*f(x)|$ is high for the variance of the empirical averages to undergo a reduction! This is the case in the aforementioned code and plot as well. But the art of choosing the right $\mathbb{\pi}$ is not explored in this blog. Reference section will have appropriate resources to help the interested readers satiate their curiosity about this connection!
 {: .prompt-info}
 
-### METROPOLIS-HASTINGS
+### MARKOV CHAIN MONTE CARLO
+
+#### METROPOLIS-HASTINGS
 
 What if we could come up with a way to sample from the posterior distribution directly, despite it being tricky to do so? This achieves two things simultaneously: we would have samples from the intractable posterior, and also be in a position to get good estimates of expectation by finding 
 $$\frac{1}{N} \sum_{n = 1}^{N} f(\mu_n)$$, 
@@ -711,7 +713,7 @@ plt.tight_layout()
 
 The code explores the behavior of the markov chain for different variances of the proposal distribution (which is a truncated gaussian in this case; it is symmetric). We are running the algorithm for $10000$ iterations. Before delving into an analysis, it is good to know what a burn-in period is. We cannot expect the markov chain to have attained a stationary distribution within the first few iterations of the algorithm. This means that the first few samples may not actually be from the target distribution. We tend to drop these initial samples. The amount of time taken by the chain to attain a stationary distribution is called the burn-in period. 
 
-#### LOW VARIANCE CASE
+##### LOW VARIANCE CASE
 If the variance is very low, then the markov chain progresses very slowly. If we start with sample $x$, there is a very high chance that the markov chain will continue crawling around this $x$ for a while (a long while perhaps!) before taking a leap into a different region. When the variance is $0.001$, the trace plot (plotting the MCMC sampled values) shows that the chain never explored the entire $[0,2]$ range. By taking the plotted histograms of the MCMC samples into account, we can see that the samples were more or less from around the first mode of the target distribution. As a result of this, the running mean of the samples are skewed towards the values in the lower part of the $[0,2]$ range. But the actual mean is far away from what could be computed with samples from these $10000$ iterations. 
 
 Autocorrelation factor (ACF) computes the correlation between samples at different lags. By lag, we mean to say the gap between successive samples. This gap must be such that the correlation between samples is less. Ideally, we want to be able to take independent samples from the target distribution. But Independence is a very strong criterion to meet. So we settle with being able to take uncorrelated samples from the distribution. Intuitively, if most of the samples are correlated, then there is nothing much informative (about the space on which the distribution is defined) in those samples. This may be equivalent to one (or more) samples that contains all information needed about the $10000$ samples. For extremely low variance like $0.001$, the ACF is close to zero when we consider every $i^{th}$ sample where $i \geq 40$. This means that every $40^{th}$ sample reveals something informative about the space all the $10000$ samples are in, and it is more efficient to work with them than work with all $10000$ samples to arrive at the same conclusion on any analysis that is carried out. To quantify this intuition, we look at Effective Sample Size (ESS). It is expressed as 
@@ -719,7 +721,7 @@ $\frac{N}{1 + 2\sum_{k = 1}^{\infty} \rho_k}$. If the correlation remains consis
 
 Since the variance is very low, the algorithm will accept many of the candidate samples. Given that the proposal distribution is symmetric, Hastings ratio will be close to $1$ most of the time (provided that the target distribution is smooth around the neighborhood of any arbitrary point). The acceptance rate will be very high for low variance case.
 
-#### HIGH VARIANCE CASE 
+##### HIGH VARIANCE CASE 
 
 As the variance becomes large, we can expect the candidates $x'$ (sampled from the proposal conditioned on $x_{j - 1}$) to take wild leaps to less expressive regions of the target distribution. If this happens, then the Hastings ratio will be significantly smaller than $1$, rejecting $x'$ most of the time. It implies that the markov chain will be stuck in the same sample value (previous sample) for sometime. This may not be clear from the image in the slide deck. Below are the zoomed in versions of the trace plot for both low and high variance case. In the low variance case, the previous sample was not repeated most of the times. Due to explanation given for the high variance case, we can see that the previous sample value is retained for sometime before taking a leap to a different sample. This implies that the acceptance rate for high variance will be less when compared to the low variance case.
 
@@ -737,7 +739,7 @@ Choosing the right parameters for the proposal distribution (and choosing the di
 > The theory of markov chains has only been treated axiomatically here. For a more rigorous treatment, you can refer to books by Shiryaev on Probability.
 {: .prompt-info}
 
-### GIBBS SAMPLING
+#### GIBBS SAMPLING
 
 What if we do not want to get into the messy details of the proposal distribution for sampling? As seen in the previous section, the choice of the proposal distribution (and its parameters) influences the behavior of the chain. Gibbs Sampling provides a way to work around this problem. We have a joint posterior that is difficult to sample from. But, we know the full conditional distributions the joint distribution splits into. As an example, consider three random variables 
 $\mu_1$, $\mu_2$, and $\mu_3$. It is hard to sample from 
@@ -1029,11 +1031,15 @@ The concerning problem dealt with in this article is intractability of posterior
 
 > Bishop, C. M. (2007). Pattern Recognition and Machine Learning (Information Science and Statistics). Springer. ISBN: 0387310738
 
+> Blei, D. M., Kucukelbir, A., & McAuliffe, J. D. (2017). Variational Inference: A Review for Statisticians. Journal of the American Statistical Association, 112(518), 859–877. https://doi.org/10.1080/01621459.2017.1285773
+
 > [This blog helped me understand the balance equation in Gibbs Sampling](https://rpubs.com/Deb2024/1347161) 
 
 > [This youtube video was used as a reference for implementing Importance Sampling](https://youtu.be/C3p2wI4RAi8?si=0KyfouO8gUd0_zLd)
 
 > [I referred to this for the Bayesian Model used in the Gibbs Sampling Implementation](https://youtu.be/2ff_Dm41Tx4?si=v8x-Ot40yP5D1HeC)
+
+> [Lecture notes from UC Berkeley elaborates on the choice of $\mathbb{\pi}$ in Importance Sampling](https://ib.berkeley.edu/labs/slatkin/eriq/classes/guest_lect/mc_lecture_notes.pdf)
 
 The pseudocodes for Metropolis-Hastings and Gibbs Sampling were taken from Sayed, A.H. (2022) and Bishop, C.M. (2007) respectively.
 
