@@ -1,5 +1,5 @@
 """
-GIBBS SAMPLING IN ACTION
+GIBBS SAMPLING IN ACTION!
 """
 
 import matplotlib.pyplot as plt
