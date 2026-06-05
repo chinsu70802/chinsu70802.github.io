@@ -46,8 +46,9 @@ def compute_elbo(x,variational_means,variational_var,variational_cat,var_mu): # 
 np.random.seed(42)
 
 K = 2           # Number of components
-var_mu = 4      # The variance hyperparameter in the distribution from which means are drawn from
+var_mu = 10      # The variance hyperparameter in the distribution from which means are drawn from
 mu_params = np.random.normal(0, np.sqrt(var_mu), size=K)  # List of K means sampled from normal distribution with mean 0 and variance var_mu
+print(mu_params)
 
 N = 1000        # Number of observations
 categories = [i for i in range(K)] # Index of the cluster means
@@ -121,13 +122,13 @@ for k in range(K):              # Courtesy: Claude
     
     true_post_var = 1 / (1/var_mu + n_k)
     true_post_mean = true_post_var * np.sum(assigned)
-    mu_range = np.linspace(true_post_mean - 4*np.sqrt(true_post_var),true_post_mean + 4*np.sqrt(true_post_var), 300)
-
+#    mu_range = np.linspace(true_post_mean - 4*np.sqrt(true_post_var),true_post_mean + 4*np.sqrt(true_post_var), 300)
+    mu_range = np.linspace(-8,8, 300)
     plt.plot(mu_range, norm.pdf(mu_range, true_post_mean, np.sqrt(true_post_var)), label=f'True mean posterior for component k={k}')
     plt.plot(mu_range, norm.pdf(mu_range, variational_means[k], np.sqrt(variational_var[k])), linestyle='--', label=f'q(μ_{k})')
 plt.title('Comparing the true mean posterior with variational factors for the means')
 plt.xlabel('Means')
 plt.ylabel('Density')
-plt.legend()
+# plt.legend()
 plt.savefig('../../images/variational_inference/posterior_mean_comp.png')
 

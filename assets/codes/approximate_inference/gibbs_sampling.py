@@ -58,7 +58,7 @@ sigma_mu = 1                # Variance hyperaparameter of the gaussian prior of 
 a = 2                       # alpha parameter of the inverse gamma prior on the variance
 b = 1                    # beta parameter of the inverse gamma prior on the variance
 T = 10000                   # Number of iterations in the Gibbs Sampler
-N = 30                      # Total number of observations Y
+N = 100                      # Total number of observations Y
 
 # The following lines of code are for the purposes of getting the samples from the Gibbs Sampler and plotting stuff for analysis
 
