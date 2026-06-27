@@ -272,12 +272,15 @@ The best mean estimate in the $m^{th}$ iteration can be interpreted as the weigh
 ```python
 """
 EXPECTATION-MAXIMIZATION AS APPLIED TO GAUSSIAN MIXTURE MODELS
+
+TO RUN THIS CODE LOCALLY, YOU NEED TO CLONE THE GITHUB REPOSITORY LINKED IN THE "GITHUB REPO CREDITS" SECTION OF THIS BLOG.
+CREATE A VIRTUAL ENV WITH PYTHON 3.10 AND PIP INSTALL THE REQUIREMENTS AS IN THE GITHUB REPOSITORY'S "requirements.txt"
 """
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import multivariate_normal
-from scipy.special import logsumexp, softmax
-from gaussian_contour_levels.contourlevels import make_ellipse_parameter_dict
+from scipy.special import logsumexp, softmax 
+from gaussian_contour_levels.contourlevels import make_ellipse_parameter_dict  
 from matplotlib.patches import Ellipse
 
 np.random.seed(20)
@@ -414,7 +417,7 @@ As observed in the plot above, the log-likelihood is monotonically increasing as
 
 For the illustration, well separated gaussian components were used to generate observations. I could have chosen overlapping gaussians (or poorly separated observations), but that was not visually pleasing. If you wish to observe the EM behavior in those cases, you can modify the distribution of the cluster_means variable in the code and analyze the plots. You will notice that it takes more iterations to converge than the current setup (Nevertheless, the code execution is fast for the latter case!). 
 
-Let us see how the EM algorithm evolved over iterations, and tried adapting to the observed data!
+Let us see how the EM algorithm evolved over iterations, and tried adapting to the observed data! (Note that the word 'state' in the figure refers to EM iteration index)
 
 ![Evolution of EM - 0](/assets/images/expectation_maximization/state_0.png)
 ![Evolution of EM - 4](/assets/images/expectation_maximization/state_4.png)
@@ -424,15 +427,20 @@ Let us see how the EM algorithm evolved over iterations, and tried adapting to t
 
 ## EPILOGUE
 
-In this article, we covered the difficulties faced by empiricists in ML estimation. Analogous to approximate inference techniques that bayesians use, Expectation-Maximization was introduced as a tool that the frequentists can employ to work around computational intractability. There seems to be a spiritual resemblance in the way EM and Variational Inference works. Both seems to involve coordinate ascent, but there must be more to it than meets the eye. In future blog posts, we will explore this connection. For now, we can halt the discussions on theoretical aspects and see where the theory developed so far in the blog posts get applied. The next article will be focussing on a speech application (a research paper) that makes use of concepts seen so far to discover fundamental units of speech given a speech signal. 
+In this article, we covered the difficulties faced by empiricists in ML estimation. Analogous to approximate inference techniques that bayesians use, Expectation-Maximization was introduced as a tool that the frequentists can employ to work around computational intractability. But, the discussion on EM doesn't end here...
+
+There is an interesting connect between EM and Variational Inference!
+
+Recall that 
+$ELBO(q) = \mathbb{E}_{z \sim q}[\log \frac{p(y,z)}{q(z)}]$. In the previous article on variational inference, we saw that best approximation of the intractable posterior $p(z|y)$ is the function $q$ that maximizes $ELBO(q)$ or equivalently minimizes the KL-Divergence between $p(z|y)$ and $q(z)$. In the setting of EM, $p(y,z)$ is parameterized by $\theta$ and is written as $p(y,z|\theta)$. We neither know $q$ nor $\theta$. We also do not have any informative prior on $\theta$. So, the $ELBO$ becomes a function of $q$ and $\theta$. Furthermore, $ELBO(q) \leq \log p(y|\theta)$. In order to maximize the RHS of the inequality, it is sufficient to maximize the LHS i.e. $ELBO$. As explained in the <a href="https://mbernste.github.io/posts/em/">blog post</a> by Matthew Bernstein on EM, it can be seen that EM is just a coordinate ascent on $ELBO$, where we alternate between finding maximizers $q$ and $\theta$! For more details, you can read the blog post. I do not wish to plunge into more details right now. In future blog posts, we will explore this connection more. For now, we can halt the discussions on theoretical aspects and see where the theory developed so far in the blog posts get applied. The next article will be focussing on a speech application (a research paper) that makes use of concepts seen for acoustic unit discovery in speech signals.
 
 ## REFERENCES
 
 > Sayed, A. H. (2022). *Inference and Learning from Data: Inference*. Cambridge University Press.
 
-## GITHUB CREDITS   
+## GITHUB REPO CREDITS   
 
-Credits are due to herzphi (https://github.com/herzphi), whose github repository (https://github.com/herzphi/2DGaussianContourLevels) aided in plotting gaussian contours.
+Credits are due to <a href = "https://github.com/herzphi">herzphi</a>, whose <a href = "https://github.com/herzphi/2DGaussianContourLevels">github repository </a> aided in plotting gaussian contours.
 
 ## AI USAGE DISCLOSURE
 
