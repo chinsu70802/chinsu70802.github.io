@@ -76,7 +76,7 @@ People living in the Bayesian world faced issues with intractability of the post
 
 ## EXAMPLE: GAUSSIAN MIXTURE MODEL
 
-Consider a set of $K$ distinct gaussian distributions, where $k^{th}$ gaussian has mean as $\mu_k$ and covariance as $\Sigma_k$. Let there be an observation $y_i$ which is drawn from the $k^{th}$ gaussian with probability $\pi_k$. Essentially, you may have sampled $y_i$ from the first gaussian in the first attempt, tenth gaussian in the second attempt etc. Then, we can write the likelihood as (assume that the observations are conditionally independent of each other given the parameters $\mathbf{\mu} = \mu_1, \mu_2, \ldots, \mu_K$ and $\mathbf{\Sigma} = \Sigma_1, \Sigma_2, \ldots, \Sigma_K$) :
+Consider a set of $K$ distinct gaussian distributions, where $k^{th}$ gaussian has mean as $\mu_k$ and covariance as $\Sigma_k$. Let there be an observation $y_i$ which is drawn from the $k^{th}$ gaussian with probability $\pi_k$. Essentially, you may have sampled $y_i$ from the first gaussian in the first attempt, tenth gaussian in the second attempt etc. Then, we can write the likelihood as (assume that the observations are conditionally independent of each other given the parameters $\mathbf{\mu} = \mu_1, \mu_2, \ldots, \mu_K$ and $\mathbf{\Sigma} = \Sigma_1, \Sigma_2, \ldots, \Sigma_K$):
 
 $$
 \begin{align}
