@@ -217,6 +217,7 @@ exclude:
   - purgecss.js
   - "*.config.js"
   - "package*.json"
+  - ellipse # local Python virtual environment, not site content
 
 jekyll-archives:
   enabled: [categories, tags]
